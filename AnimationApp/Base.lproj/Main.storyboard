@@ -65,6 +65,7 @@
                     </view>
                     <connections>
                         <outlet property="infoAnimationLabel" destination="BPb-rm-QpI" id="uO7-zI-s9I"/>
+                        <outlet property="springAnimationButton" destination="wbz-4E-dE4" id="CdG-Lz-L2e"/>
                         <outlet property="springAnimationView" destination="MCG-gF-JSB" id="wfG-Va-lYA"/>
                     </connections>
                 </viewController>

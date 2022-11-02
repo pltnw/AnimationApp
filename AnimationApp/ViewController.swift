@@ -12,32 +12,46 @@ class ViewController: UIViewController {
 
     @IBOutlet var springAnimationView: SpringView!
     @IBOutlet var infoAnimationLabel: UILabel!
+    @IBOutlet var springAnimationButton: SpringButton!
     
     override func viewWillLayoutSubviews() {
-        springAnimationView.layer.cornerRadius = springAnimationView.frame.height / 2
+        springAnimationView.layer.cornerRadius = 15
     }
 
     @IBAction func startSpringAnimation(_ sender: SpringButton) {
-        springAnimationView.animation = "pop"
-        springAnimationView.curve = "easeOut"
-        springAnimationView.force = 2
-        springAnimationView.duration = 1.05
-        springAnimationView.delay = 0.3
+        setAnimationForButton()
+        setAnimationForView()
+        setInfoLabel()
+    }
+    
+    private func setAnimationForButton() {
+        springAnimationButton.animation = "pop"
+        springAnimationButton.curve = "easeOut"
+        springAnimationButton.force = 0.3
         
-        sender.animation = "pop"
-        sender.curve = "easeOut"
-        sender.force = 0.3
+        springAnimationButton.animate()
+    }
+    
+    private func setAnimationForView() {
+        springAnimationView.animation = DataStore.shared.animationPreset.randomElement() ?? ""
+        springAnimationView.curve = DataStore.shared.animationCurve.randomElement() ?? ""
+        springAnimationView.force = CGFloat.random(in: 1...5)
+        springAnimationView.duration = CGFloat.random(in: 0.5...1.5)
+        springAnimationView.delay = CGFloat.random(in: 0.2...0.7)
         
         springAnimationView.animate()
-        sender.animate()
-        
-        infoAnimationLabel.text = """
-preset: \(springAnimationView.animation)
-curve: \(springAnimationView.curve)
-forse: \(springAnimationView.force)
-duration: \(springAnimationView.duration)
-delay: \(springAnimationView.delay)
-"""
     }
+    
+    private func setInfoLabel() {
+        infoAnimationLabel.text = (String(format: """
+        preset: \(springAnimationView.animation)
+        curve: \(springAnimationView.curve)
+        forse: %.2f
+        duration: %.2f
+        delay: %.2f
+        """, springAnimationView.force, springAnimationView.duration, springAnimationView.delay))
+    }
+    
 }
+
 
