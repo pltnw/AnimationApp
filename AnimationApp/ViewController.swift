@@ -6,18 +6,28 @@
 //
 
 import UIKit
+import SpringAnimation
 
 class ViewController: UIViewController {
 
-    @IBOutlet var animatedObject: UIView!
+    @IBOutlet var springAnimationView: SpringView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
     override func viewWillLayoutSubviews() {
-        animatedObject.layer.cornerRadius = animatedObject.frame.height / 2
+        springAnimationView.layer.cornerRadius = springAnimationView.frame.height / 2
     }
 
+    @IBAction func startSpringAnimation(_ sender: SpringButton) {
+        springAnimationView.animation = "pop"
+        springAnimationView.curve = "easeOut"
+        springAnimationView.force = 2
+        springAnimationView.duration = 1.05
+        springAnimationView.delay = 0.3
+        
+        sender.animation = "pop"
+        
+        springAnimationView.animate()
+        sender.animate()
+        
+    }
 }
 
