@@ -11,6 +11,7 @@ import SpringAnimation
 class ViewController: UIViewController {
 
     @IBOutlet var springAnimationView: SpringView!
+    @IBOutlet var infoAnimationLabel: UILabel!
     
     override func viewWillLayoutSubviews() {
         springAnimationView.layer.cornerRadius = springAnimationView.frame.height / 2
@@ -24,10 +25,19 @@ class ViewController: UIViewController {
         springAnimationView.delay = 0.3
         
         sender.animation = "pop"
+        sender.curve = "easeOut"
+        sender.force = 0.3
         
         springAnimationView.animate()
         sender.animate()
         
+        infoAnimationLabel.text = """
+preset: \(springAnimationView.animation)
+curve: \(springAnimationView.curve)
+forse: \(springAnimationView.force)
+duration: \(springAnimationView.duration)
+delay: \(springAnimationView.delay)
+"""
     }
 }
 
